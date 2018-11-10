@@ -25,15 +25,12 @@ jobs:
           name: Push image to registory
           command: |
             NODE_VERSION=$(fgrep 'node:' Dockerfile | sed -E 's/^.*node\:([0-9\.]+).*$/\1/')
-            # PYTHON2_VERSION=$(fgrep 'python2:' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
-            # PYTHON3_VERSION=$(fgrep 'python3:' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
-            # TAG_NAME="node$NODE_VERSION-py$PYTHON2_VERSION-py$PYTHON3_VERSION"
-            echo $NODE_VERSION
-            echo $IMAGE_NAME
-            echo $TAG_NAME
+            PYTHON2_VERSION=$(fgrep 'python:2' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
+            PYTHON3_VERSION=$(fgrep 'python:3' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
+            TAG_NAME="node$NODE_VERSION-py$PYTHON2_VERSION-py$PYTHON3_VERSION"
 
-            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            #   docker tag $OWNER/$IMAGE_NAME:latest $OWNER/$IMAGE_NAME:$TAG_NAME
-            #   docker push $OWNER/$IMAGE_NAME
-            #   docker push $OWNER/$IMAGE_NAME:$TAG_NAME
-            # fi
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker tag $OWNER/$IMAGE_NAME:latest $OWNER/$IMAGE_NAME:$TAG_NAME
+              docker push $OWNER/$IMAGE_NAME
+              docker push $OWNER/$IMAGE_NAME:$TAG_NAME
+            fi
