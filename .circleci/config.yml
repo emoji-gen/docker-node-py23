@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/workspace
     environment:
       OWNER: emojigen
-      IMAGE_NAME: docker-node-py23
+      IMAGE_NAME: node-py23
     steps:
       - setup_remote_docker:
           version: 17.11.0-ce
