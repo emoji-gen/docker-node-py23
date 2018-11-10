@@ -28,9 +28,9 @@ jobs:
             # PYTHON2_VERSION=$(fgrep 'python2:' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
             # PYTHON3_VERSION=$(fgrep 'python3:' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
             # TAG_NAME="node$NODE_VERSION-py$PYTHON2_VERSION-py$PYTHON3_VERSION"
-            # echo $OWNER
-            # echo $IMAGE_NAME
-            # echo $TAG_NAME
+            echo $NODE_VERSION
+            echo $IMAGE_NAME
+            echo $TAG_NAME
 
             # if [ "${CIRCLE_BRANCH}" == "master" ]; then
             #   docker tag $OWNER/$IMAGE_NAME:latest $OWNER/$IMAGE_NAME:$TAG_NAME
