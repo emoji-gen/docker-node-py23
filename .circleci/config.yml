@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.11.0-ce
+    working_directory: ~/workspace
+    environment:
+      OWNER: emojigen
+      IMAGE_NAME: docker-node-py23
+    steps:
+      - setup_remote_docker:
+          version: 17.11.0-ce
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: Build
+          command: docker build -t $OWNER/$IMAGE_NAME:latest .
+      - run:
+          name: Docker Login
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
+            fi
+      - run:
+          name: Push image to registory
+          command: |
+            NODE_VERSION=$(fgrep 'node:' Dockerfile | sed -E 's/^.*node\:([0-9\.]+).*$/\1/')
+            PYTHON2_VERSION=$(fgrep 'python2:' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
+            PYTHON3_VERSION=$(fgrep 'python3:' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
+            TAG_NAME="node$NODE_VERSION-py$PYTHON2_VERSION-py$PYTHON3_VERSION"
+
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker tag $OWNER/$IMAGE_NAME:latest $OWNER/$IMAGE_NAME:$TAG_NAME
+              docker push $OWNER/$IMAGE_NAME
+              docker push $OWNER/$IMAGE_NAME:$TAG_NAME
+            fi
