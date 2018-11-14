@@ -35,8 +35,9 @@ RUN ["/bin/bash", "-c", "\
   set -eux -o pipefail \
     && apt-get -qq update \
     && apt-get -qq install -y --no-install-recommends \
-      git curl ca-certificates ssh-client \
+      curl ca-certificates git \
       libyaml-dev zlib1g-dev libssl-dev libbz2-dev libreadline-dev \
+      make ssh-client \
     \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
     && ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
