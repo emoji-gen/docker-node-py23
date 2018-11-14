@@ -39,6 +39,9 @@ RUN ["/bin/bash", "-c", "\
     && ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
     && ln -s /opt/yarn-*/bin/yarn /usr/local/bin/yarn \
     && ln -s /opt/yarn-*/bin/yarnpkg /usr/local/bin/yarnpkg \
+    && node -v \
+    && yarn -v \
+    && npm -v \
     \
     && ln -s /usr/local/bin/pip2.7 /usr/local/bin/pip2 \
     && ln -s /usr/local/bin/pip2 /usr/local/bin/pip \
@@ -48,6 +51,7 @@ RUN ["/bin/bash", "-c", "\
     && ln -s /usr/local/bin/python2-config /usr/local/bin/python-config \
     && ln -s /usr/local/lib/libpython2.7.so.1.0 /usr/local/lib/libpython2.7.so \
     && ldconfig \
+    && python2 --version \
     \
     && pip install pip --upgrade \
     && pip install wheel==0.31.1 --upgrade \
@@ -60,6 +64,7 @@ RUN ["/bin/bash", "-c", "\
     && ln -s /usr/local/bin/python3.7-config /usr/local/bin/python3-config \
     && ln -s /usr/local/lib/libpython3.7m.so.1.0 /usr/local/lib/libpython3.7m.so \
     && ldconfig \
+    && python3 --version \
     \
     && pip3 install pip --upgrade \
     && pip3 install wheel==0.31.1 --upgrade \
