@@ -22,6 +22,10 @@ jobs:
               echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
             fi
       - run:
+          name: Debug
+          command: |
+            ./update.sh
+      - run:
           name: Push image to registory
           command: |
             NODE_VERSION=$(fgrep 'node:' Dockerfile | sed -E 's/^.*node\:([0-9\.]+).*$/\1/')
