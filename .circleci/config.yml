@@ -24,6 +24,7 @@ jobs:
       - run:
           name: Debug
           command: |
+            apk add --update jq wget ca-certificates
             ./update.sh
       - run:
           name: Push image to registory
