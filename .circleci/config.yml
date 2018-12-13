@@ -5,8 +5,9 @@ jobs:
       - image: docker:17.11.0-ce
     working_directory: ~/workspace
     environment:
-      OWNER: emojigen
-      IMAGE_NAME: node-py23
+      GIT_TERMINAL_PROMPT: 0
+      DOCKER_OWNER: emojigen
+      DOCKER_IMAGE: node-py23
     steps:
       - setup_remote_docker:
           version: 17.11.0-ce
@@ -14,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: docker build -t $OWNER/$IMAGE_NAME:latest .
+          command: docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
       - run:
           name: Docker Login
           command: |
@@ -25,6 +26,7 @@ jobs:
           name: Debug
           command: |
             apk add -U -q --no-progress ca-certificates git jq sed wget
+            ./.circleci/setup-git.sh
             ./.circleci/update-dockerfile.sh
       - run:
           name: Push image to registory
@@ -35,7 +37,7 @@ jobs:
               PYTHON3_VERSION=$(fgrep 'python:3' Dockerfile | sed -E 's/^.*python\:([0-9\.]+).*$/\1/')
               TAG_NAME="node$NODE_VERSION-py$PYTHON2_VERSION-py$PYTHON3_VERSION"
 
-              docker tag $OWNER/$IMAGE_NAME:latest $OWNER/$IMAGE_NAME:$TAG_NAME
-              docker push $OWNER/$IMAGE_NAME
-              docker push $OWNER/$IMAGE_NAME:$TAG_NAME
+              docker tag $DOCKER_OWNER/$DOCKER_IMAGE:latest $DOCKER_OWNER/$DOCKER_IMAGE:$TAG_NAME
+              docker push $DOCKER_OWNER/$DOCKER_IMAGE
+              docker push $DOCKER_OWNER/$DOCKER_IMAGE:$TAG_NAME
             fi
