@@ -25,7 +25,7 @@ jobs:
           name: Debug
           command: |
             apk add -U -q --no-progress ca-certificates git jq sed wget
-            ./update.sh
+            ./.circleci/update-dockerfile.sh
       - run:
           name: Push image to registory
           command: |
