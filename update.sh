@@ -11,9 +11,9 @@ PYTHON_TAGS_PATH="$TMP_DIR/python_tags.txt"
 # -----------------------------------------------------------------------------
 
 printf "Finding docker tags ."
-wget -O - "$NODE_TAGS_URL" -q | jq -r '.[].name' > "$NODE_TAGS_PATH"
+wget -O - "$NODE_TAGS_URL" -qq | jq -r '.[].name' > "$NODE_TAGS_PATH"
 printf "."
-wget -O - "$PYTHON_TAGS_URL" -q | jq -r '.[].name' > "$PYTHON_TAGS_PATH"
+wget -O - "$PYTHON_TAGS_URL" -qq | jq -r '.[].name' > "$PYTHON_TAGS_PATH"
 printf ".\n"
 
 # -----------------------------------------------------------------------------
