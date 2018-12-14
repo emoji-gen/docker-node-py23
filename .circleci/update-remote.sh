@@ -1,5 +1,5 @@
 #!/bin/sh
 
-git diff --raw
+git --no-pager diff --raw
 
 git commit -a -m 'chore(Dockerfile): update from images' --no-edit
