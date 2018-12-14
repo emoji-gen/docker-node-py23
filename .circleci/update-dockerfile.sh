@@ -51,7 +51,3 @@ echo -e "\tPython v$PYTHON3_VERSION -> v$PYTHON3_LATEST_VERSION"
 sed -i -E "s/FROM node:([0-9]+\.[0-9]+\.[0-9]+)/FROM node:$NODE_LATEST_VERSION/" Dockerfile
 sed -i -E "s/FROM python:(2\.[0-9]+\.[0-9]+)/FROM python:$PYTHON2_LATEST_VERSION/" Dockerfile
 sed -i -E "s/FROM python:(3\.[0-9]+\.[0-9]+)/FROM python:$PYTHON3_LATEST_VERSION/" Dockerfile
-
-# -----------------------------------------------------------------------------
-
-printf "\n\e[32msuccess\e[39m\n"
