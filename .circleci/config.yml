@@ -25,10 +25,12 @@ jobs:
       - run:
           name: Debug
           command: |
-            apk add -U -q --no-progress ca-certificates git jq sed wget
-            ./.circleci/setup-git.sh
-            ./.circleci/update-dockerfile.sh
-            ./.circleci/update-remote.sh
+            if [ "$CIRCLE_BRANCH" == 'master' ]; then
+              apk add -U -q --no-progress ca-certificates git jq sed wget
+              ./.circleci/setup-git.sh
+              ./.circleci/update-dockerfile.sh
+              ./.circleci/update-remote.sh
+            fi
       - run:
           name: Push image to registory
           command: |
