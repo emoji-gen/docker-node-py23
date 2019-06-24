@@ -52,8 +52,7 @@ RUN ["/bin/bash", "-c", "\
     && ln -s /usr/local/lib/libpython2.7.so.1.0 /usr/local/lib/libpython2.7.so \
     && ldconfig \
     && python2 --version \
-    \
-    && pip install pip --upgrade \
+    && pip --version \
     && pip install wheel==0.31.1 --upgrade \
     \
     && sed -i -e '1 s/python$/python3/' /usr/local/bin/pip3 \
@@ -65,8 +64,7 @@ RUN ["/bin/bash", "-c", "\
     && ln -s /usr/local/lib/libpython3.7m.so.1.0 /usr/local/lib/libpython3.7m.so \
     && ldconfig \
     && python3 --version \
-    \
-    && pip3 install pip --upgrade \
+    && pip3 --version \
     && pip3 install wheel==0.31.1 --upgrade \
     \
     && apt-get -qq autoremove -y \
