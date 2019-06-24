@@ -3,6 +3,8 @@ FROM python:2.7.15-stretch AS python2
 FROM python:3.7.0-stretch AS python3
 FROM debian:stretch-slim AS combined
 
+ENV DEBIAN_FRONTEND noninteractive
+
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
@@ -29,6 +31,7 @@ COPY --from=python3 /usr/local/include/python3.7m /usr/local/include/python3.7m
 RUN ["/bin/bash", "-c", "\
   set -eux -o pipefail \
     && apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends apt-utils  \
     && apt-get -qq install -y --no-install-recommends \
       curl ca-certificates git \
       libyaml-dev zlib1g-dev libssl-dev libbz2-dev libreadline-dev \
