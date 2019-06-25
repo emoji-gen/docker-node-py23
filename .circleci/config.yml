@@ -22,31 +22,47 @@ jobs:
             if [ "$CIRCLE_BRANCH" == 'master' ]; then
               echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
             fi
-      # - run:
-      #     name: Debug
-      #     command: |
-      #       if [ "$CIRCLE_BRANCH" == 'master' ]; then
-      #         apk add -U -q --no-progress ca-certificates git jq sed wget
-      #         ./.circleci/setup-git.sh
-      #         ./.circleci/update-dockerfile.sh
-      #         ./.circleci/update-remote.sh
-      #       fi
       - run:
           name: Push image to registory
           command: |
             if [ "$CIRCLE_BRANCH" == 'master' ]; then
               ./.circleci/push-docker-image.sh
             fi
+  sync:
+    docker:
+      - image: docker:17.11.0-ce
+    working_directory: ~/workspace
+    environment:
+      GIT_TERMINAL_PROMPT: 0
+      DOCKER_OWNER: emojigen
+      DOCKER_IMAGE: node-py23
+    steps:
+      - setup_remote_docker:
+          version: 17.11.0-ce
+          docker_layer_caching: true
+      - checkout
+      - run:
+          name: Update dockerfile
+          command: |
+            if [ "$CIRCLE_BRANCH" == 'master' ]; then
+              apk add -U -q --no-progress ca-certificates git jq sed wget
+              ./.circleci/setup-git.sh
+              ./.circleci/update-dockerfile.sh
+              # ./.circleci/update-remote.sh
+            fi
+      - run:
+          name: Build
+          command: docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
 
 workflows:
   version: 2
   sync:
     triggers:
       - schedule:
-          cron: '0 0 * * *' # UTC
+          cron: '0 * * * *' # UTC
           filters:
             branches:
               only:
                 - master
     jobs:
-      - build
+      - sync
