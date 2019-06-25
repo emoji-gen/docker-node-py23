@@ -53,6 +53,12 @@ jobs:
       - run:
           name: Build
           command: docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
+      - run:
+          name: Push image to registory
+          command: |
+            if [ "$CIRCLE_BRANCH" == 'master' ]; then
+              ./.circleci/push-docker-image.sh
+            fi
 
 workflows:
   version: 2
