@@ -44,21 +44,18 @@ jobs:
       - run:
           name: Update dockerfile
           command: |
-            if [ "$CIRCLE_BRANCH" == 'master' ]; then
-              apk add -U -q --no-progress ca-certificates git jq sed wget
-              ./.circleci/setup-git.sh
-              ./.circleci/update-dockerfile.sh
-              # ./.circleci/update-remote.sh
-            fi
+            apk add -U -q --no-progress ca-certificates git jq sed wget
+            ./.circleci/setup-git.sh
+            ./.circleci/update-dockerfile.sh
+            # ./.circleci/update-remote.sh
       - run:
           name: Build
-          command: docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
+          command: |
+            docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
       - run:
           name: Push image to registory
           command: |
-            if [ "$CIRCLE_BRANCH" == 'master' ]; then
-              ./.circleci/push-docker-image.sh
-            fi
+            ./.circleci/push-docker-image.sh
 
 workflows:
   version: 2
