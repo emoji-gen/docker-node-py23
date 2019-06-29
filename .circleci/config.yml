@@ -53,6 +53,12 @@ jobs:
           command: |
             docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
       - run:
+          name: Docker Login
+          command: |
+            if [ "$CIRCLE_BRANCH" == 'master' ]; then
+              echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
+            fi
+      - run:
           name: Push image to registory
           command: |
             ./.circleci/push-docker-image.sh
