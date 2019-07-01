@@ -47,11 +47,17 @@ jobs:
             apk add -U -q --no-progress ca-certificates git jq sed wget
             ./.circleci/setup-git.sh
             ./.circleci/update-dockerfile.sh
-            # ./.circleci/update-remote.sh
       - run:
           name: Build
           command: |
             docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
+      - add_ssh_keys:
+          fingerprints:
+            - 'a0:2d:46:4c:76:a1:b0:97:5f:1f:d4:9b:97:f6:21:89'
+      - run:
+          name: Push to GitHub
+          command: |
+            ./.circleci/update-remote.sh
       - run:
           name: Docker Login
           command: |
