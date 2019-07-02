@@ -5,9 +5,12 @@ if [ -n "$(git --no-pager diff --raw)" ]; then
 
   git config user.name 'Emoji Generator'
   git config user.email 'ultimate.emoji.gen@gmail.com'
-  git config remote.origin 'git@github.com:emoji-gen/docker-node-py23.git'
 
+  git stash -u
+  git checkout master
+  git pull origin master
+  git stash pop
   git add .
   git commit -m 'chore(Dockerfile): update from images'
-  git push origin master
+  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git push origin master
 fi
