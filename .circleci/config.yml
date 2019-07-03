@@ -67,7 +67,7 @@ jobs:
       - run:
           name: Push image to registory
           command: |
-            apk add openssh
+            apk add --update --no-cache openssh
             ./.circleci/push-docker-image.sh
 
 workflows:

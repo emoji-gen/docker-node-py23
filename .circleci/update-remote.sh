@@ -6,11 +6,15 @@ if [ -n "$(git --no-pager diff --raw)" ]; then
   git config user.name 'Emoji Generator'
   git config user.email 'ultimate.emoji.gen@gmail.com'
 
+  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no'
   git stash -u
   git checkout master
   git pull origin master
   git stash pop
+  git status
   git add .
+  git status
   git commit -m 'chore(Dockerfile): update from images'
-  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no' git push origin master
+  git status
+  git push origin master
 fi
