@@ -57,6 +57,7 @@ jobs:
       - run:
           name: Push to GitHub
           command: |
+            apk add -U -q --no-progress openssh
             ./.circleci/update-remote.sh
       - run:
           name: Docker Login
@@ -67,7 +68,6 @@ jobs:
       - run:
           name: Push image to registory
           command: |
-            apk add --update --no-cache openssh
             ./.circleci/push-docker-image.sh
 
 workflows:
