@@ -78,7 +78,7 @@ workflows:
   sync:
     triggers:
       - schedule:
-          cron: '30 9 * * *' # UTC
+          cron: '30 0 * * *' # UTC
           filters:
             branches:
               only:
