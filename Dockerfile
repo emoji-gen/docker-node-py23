@@ -1,6 +1,6 @@
-FROM node:11.2.0-stretch AS node
-FROM python:2.7.15-stretch AS python2
-FROM python:3.7.0-stretch AS python3
+FROM node:12.6.0-stretch AS node
+FROM python:2.7.16-stretch AS python2
+FROM python:3.7.3-stretch AS python3
 FROM debian:stretch-slim AS combined
 
 ENV DEBIAN_FRONTEND noninteractive
