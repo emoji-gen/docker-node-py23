@@ -6,7 +6,7 @@ if [ -n "$(git --no-pager diff --raw)" ]; then
   git config user.name 'Emoji Generator'
   git config user.email 'ultimate.emoji.gen@gmail.com'
 
-  GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no'
+  export GIT_SSH_COMMAND='ssh -o StrictHostKeyChecking=no'
   git stash -u
   git checkout master
   git pull origin master
