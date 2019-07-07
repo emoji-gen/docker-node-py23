@@ -62,9 +62,7 @@ jobs:
       - run:
           name: Docker Login
           command: |
-            if [ "$CIRCLE_BRANCH" == 'master' ]; then
-              echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
-            fi
+            echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
       - run:
           name: Push image to registory
           command: |
