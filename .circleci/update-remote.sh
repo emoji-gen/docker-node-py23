@@ -12,7 +12,7 @@ if [ -n "$(git --no-pager diff --raw)" ]; then
   git pull origin master
   git stash pop
   git status
-  git commit -a -m 'chore(Dockerfile): update from images'
+  git commit -a -m 'chore(Dockerfile): update images'
   git status
   git push origin master
 fi
