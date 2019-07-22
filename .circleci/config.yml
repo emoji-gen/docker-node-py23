@@ -45,7 +45,6 @@ jobs:
           name: Update dockerfile
           command: |
             apk add -U -q --no-progress ca-certificates git jq sed wget
-            ./.circleci/setup-git.sh
             ./.circleci/update-dockerfile.sh
       - run:
           name: Build
