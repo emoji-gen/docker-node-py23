@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+set -eu -o pipefail
 
 if [ -n "$(git --no-pager diff --raw)" ]; then
   echo 'The worktree is dirty.'
