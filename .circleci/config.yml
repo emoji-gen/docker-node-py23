@@ -19,7 +19,8 @@ jobs:
             apk add -U -q --no-progress bash
       - run:
           name: Build
-          command: docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
+          command: |
+            docker build -q -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
       - run:
           name: Docker Login
           command: |
@@ -57,7 +58,7 @@ jobs:
       - run:
           name: Build
           command: |
-            docker build -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
+            docker build -q -t $DOCKER_OWNER/$DOCKER_IMAGE:latest .
       - add_ssh_keys:
           fingerprints:
             - 'a0:2d:46:4c:76:a1:b0:97:5f:1f:d4:9b:97:f6:21:89'
