@@ -2,7 +2,7 @@
 
 TMP_DIR=/tmp
 
-PLATFORM=buster
+PLATFORM=stretch
 NODE_TAGS_URL='https://registry.hub.docker.com/v1/repositories/library/node/tags'
 NODE_TAGS_PATH="$TMP_DIR/node.txt"
 PYTHON_TAGS_URL='https://registry.hub.docker.com/v1/repositories/library/python/tags'
@@ -50,11 +50,11 @@ printf "\tPython v$PYTHON3_VERSION -> v$PYTHON3_LATEST_VERSION\n"
 printf "\n"
 
 if uname -a | fgrep Darwin > /dev/null; then
-  sed -i '' -E "s/FROM node:([0-9]+\.[0-9]+\.[0-9]+)-[a-z]+/FROM node:$NODE_LATEST_VERSION-$PLATFORM/" Dockerfile
-  sed -i '' -E "s/FROM python:(2\.[0-9]+\.[0-9]+)-[a-z]+/FROM python:$PYTHON2_LATEST_VERSION-$PLATFORM/" Dockerfile
-  sed -i '' -E "s/FROM python:(3\.[0-9]+\.[0-9]+)-[a-z]+/FROM python:$PYTHON3_LATEST_VERSION-$PLATFORM/" Dockerfile
+  sed -i '' -E "s/FROM node:([0-9]+\.[0-9]+\.[0-9]+)/FROM node:$NODE_LATEST_VERSION/" Dockerfile
+  sed -i '' -E "s/FROM python:(2\.[0-9]+\.[0-9]+)/FROM python:$PYTHON2_LATEST_VERSION/" Dockerfile
+  sed -i '' -E "s/FROM python:(3\.[0-9]+\.[0-9]+)/FROM python:$PYTHON3_LATEST_VERSION/" Dockerfile
 else
-  sed -i -E "s/FROM node:([0-9]+\.[0-9]+\.[0-9]+)-[a-z]+/FROM node:$NODE_LATEST_VERSION-$PLATFORM/" Dockerfile
-  sed -i -E "s/FROM python:(2\.[0-9]+\.[0-9]+)-[a-z]+/FROM python:$PYTHON2_LATEST_VERSION-$PLATFORM/" Dockerfile
-  sed -i -E "s/FROM python:(3\.[0-9]+\.[0-9]+)-[a-z]+/FROM python:$PYTHON3_LATEST_VERSION-$PLATFORM/" Dockerfile
+  sed -i -E "s/FROM node:([0-9]+\.[0-9]+\.[0-9]+)/FROM node:$NODE_LATEST_VERSION/" Dockerfile
+  sed -i -E "s/FROM python:(2\.[0-9]+\.[0-9]+)/FROM python:$PYTHON2_LATEST_VERSION/" Dockerfile
+  sed -i -E "s/FROM python:(3\.[0-9]+\.[0-9]+)/FROM python:$PYTHON3_LATEST_VERSION/" Dockerfile
 fi
