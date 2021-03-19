@@ -1,4 +1,4 @@
-FROM node:15.11.0-stretch AS node
+FROM node:15.12.0-stretch AS node
 FROM python:2.7.18-stretch AS python2
 FROM python:3.7.10-stretch AS python3
 FROM debian:stretch-slim AS combined
