@@ -1,6 +1,6 @@
 FROM node:16.3.0-stretch AS node
 FROM python:2.7.18-stretch AS python2
-FROM python:3.7.10-stretch AS python3
+FROM python:3.7.11-stretch AS python3
 FROM debian:stretch-slim AS combined
 
 ENV DEBIAN_FRONTEND noninteractive
