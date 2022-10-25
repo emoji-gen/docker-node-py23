@@ -81,13 +81,3 @@ workflows:
   build:
     jobs:
       - build
-  sync:
-    triggers:
-      - schedule:
-          cron: '30 0 * * *' # UTC
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - sync
